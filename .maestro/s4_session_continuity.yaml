@@ -1,0 +1,20 @@
+# S4 会话连续性：同一对话跨轮记忆（对话 ID 路由）
+appId: com.openminis.app
+---
+- launchApp
+- tapOn:
+    point: "50%,90%"
+- inputText: "remember the codeword mango. reply ok"
+- hideKeyboard
+- tapOn: "Send"
+- extendedWaitUntil:
+    visible: ".*ok.*"
+    timeout: 120000
+- tapOn:
+    point: "50%,90%"
+- inputText: "what is the codeword? reply with the word only"
+- hideKeyboard
+- tapOn: "Send"
+- extendedWaitUntil:
+    visible: ".*mango.*"
+    timeout: 120000

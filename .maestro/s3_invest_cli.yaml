@@ -1,0 +1,12 @@
+# S3 投研命令：/invest CLI 经 gateway 执行
+appId: com.openminis.app
+---
+- launchApp
+- tapOn:
+    point: "50%,90%"
+- inputText: "/invest --list"
+- hideKeyboard
+- tapOn: "Send"
+- extendedWaitUntil:
+    visible: ".*(Plans|计划).*"
+    timeout: 60000

@@ -1,0 +1,16 @@
+# S2 工具卡片：服务端工具活动以原生卡片呈现
+appId: com.openminis.app
+---
+- launchApp
+- tapOn:
+    point: "50%,90%"
+- inputText: "check the current price of 600519.SH"
+- hideKeyboard
+- tapOn: "Send"
+# 工具卡片（friendly 标题）应出现，且最终有文本回复
+- extendedWaitUntil:
+    visible: ".*(Get Prices|get_prices).*"
+    timeout: 180000
+- extendedWaitUntil:
+    visible: ".*(1543|元|price|yuan).*"
+    timeout: 120000

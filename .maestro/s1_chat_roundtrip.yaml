@@ -1,0 +1,12 @@
+# S1 基础对话链路：手机 → gateway → 回复
+appId: com.openminis.app
+---
+- launchApp
+- tapOn:
+    point: "50%,90%"
+- inputText: "reply with exactly one word: pong"
+- hideKeyboard
+- tapOn: "Send"
+- extendedWaitUntil:
+    visible: ".*pong.*"
+    timeout: 120000

@@ -1,0 +1,23 @@
+# S5 面板：UpUp Research 面板可打开且重进 App 数据仍在
+appId: com.openminis.app
+---
+- launchApp
+- tapOn: ".*(设置|Settings).*"
+- repeat:
+    while:
+      notVisible: "UpUp Research"
+    commands:
+      - scroll
+- tapOn: "UpUp Research"
+- assertVisible: ".*(Watchlist|关注列表).*"
+- assertVisible: ".*(Research Plans|投研计划).*"
+# 重启后面板数据仍在
+- launchApp
+- tapOn: ".*(设置|Settings).*"
+- repeat:
+    while:
+      notVisible: "UpUp Research"
+    commands:
+      - scroll
+- tapOn: "UpUp Research"
+- assertVisible: ".*(Research Plans|投研计划).*"

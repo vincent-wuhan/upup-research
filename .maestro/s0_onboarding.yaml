@@ -1,0 +1,10 @@
+# S0 首启引导：免责声明 + 三步落地页（需先 pm clear，由 scripts/maestro-run.sh 触发）
+appId: com.openminis.app
+---
+- launchApp
+# 免责声明对话框必须先出现
+- assertVisible: ".*(Investment Disclaimer|投资免责声明).*"
+- assertVisible: ".*(AI|不构成任何投资建议).*"
+- tapOn: ".*(I Understand|我已知晓).*"
+# 确认后进入三步引导页
+- assertVisible: ".*(Welcome to Minis|欢迎使用 Minis).*"
