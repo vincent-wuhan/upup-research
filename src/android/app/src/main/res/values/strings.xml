@@ -1705,6 +1705,16 @@
     <string name="slash_upup_invest_subtitle">5-phase investment research workflow</string>
     <string name="slash_upup_dossier_subtitle">Stock research dossier — fundamentals &amp; valuation</string>
     <string name="slash_upup_risk_subtitle">Portfolio risk dashboard — exposure &amp; alerts</string>
+    <string name="upup_panel_title">UpUp Research</string>
+    <string name="upup_panel_state_section">Current Focus</string>
+    <string name="upup_panel_watchlist_section">Watchlist</string>
+    <string name="upup_panel_plans_section">Research Plans</string>
+    <string name="upup_panel_loading">Loading…</string>
+    <string name="upup_panel_error">Failed to load: %1$s</string>
+    <string name="upup_panel_watchlist_empty">Watchlist is empty. Ask in chat to add a ticker.</string>
+    <string name="upup_panel_plans_empty">No research plans yet. Run /invest in chat.</string>
+    <string name="upup_panel_refresh">Refresh</string>
+    <string name="settings_upup_panel_subtitle">Dossier, watchlist &amp; research plans from the gateway</string>
     <string name="thinking_level_off">Off</string>
     <string name="thinking_level_low">Low</string>
     <string name="thinking_level_medium">Medium</string>

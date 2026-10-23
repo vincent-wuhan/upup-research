@@ -38,6 +38,7 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Inventory2
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.TrendingUp
 import androidx.compose.material.icons.outlined.Groups
 import androidx.compose.material.icons.outlined.Handyman
 import androidx.compose.material.icons.outlined.Psychology
@@ -112,6 +113,8 @@ fun SettingsScreen(
     // About row below still has a TODO onClick in HEAD; future settings-bucket
     // work will wire this through.
     onAboutClick: () -> Unit = {},
+    // UpUp Research dossier/watchlist panel (/api/upup/* on the gateway).
+    onUpupPanelClick: () -> Unit = {},
 ) {
     val context = LocalContext.current
     var showFeedbackSheet by remember { mutableStateOf(false) }
@@ -161,6 +164,20 @@ fun SettingsScreen(
                     title = stringResource(R.string.settings_token_usage),
                     subtitle = stringResource(R.string.settings_token_usage_subtitle),
                     onClick = onUsageClick,
+                    showDivider = false,
+                )
+            }
+
+            // -- UpUp Research panel --
+            // Reads dossier / watchlist / plan state from the UpUp gateway
+            // over /api/upup/* — same origin the chat provider talks to.
+            SettingsSection(title = stringResource(R.string.upup_panel_title)) {
+                SettingsItem(
+                    icon = Icons.Outlined.TrendingUp,
+                    iconColor = Color(0xFF34C759),
+                    title = stringResource(R.string.upup_panel_title),
+                    subtitle = stringResource(R.string.settings_upup_panel_subtitle),
+                    onClick = onUpupPanelClick,
                     showDivider = false,
                 )
             }

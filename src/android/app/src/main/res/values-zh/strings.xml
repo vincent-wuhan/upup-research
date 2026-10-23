@@ -1553,6 +1553,16 @@
     <string name="slash_upup_invest_subtitle">五阶段投资研究工作流</string>
     <string name="slash_upup_dossier_subtitle">个股投研档案 — 基本面与估值</string>
     <string name="slash_upup_risk_subtitle">组合风险仪表盘 — 仓位与风险监控</string>
+    <string name="upup_panel_title">UpUp Research</string>
+    <string name="upup_panel_state_section">当前关注</string>
+    <string name="upup_panel_watchlist_section">关注列表</string>
+    <string name="upup_panel_plans_section">投研计划</string>
+    <string name="upup_panel_loading">加载中…</string>
+    <string name="upup_panel_error">加载失败：%1$s</string>
+    <string name="upup_panel_watchlist_empty">关注列表为空。可在对话中让涨涨引擎添加标的。</string>
+    <string name="upup_panel_plans_empty">暂无投研计划。在对话中运行 /invest。</string>
+    <string name="upup_panel_refresh">刷新</string>
+    <string name="settings_upup_panel_subtitle">来自云端 gateway 的投研档案 / 关注列表 / 计划</string>
     <string name="thinking_level_off">关闭</string>
     <string name="thinking_level_low">低</string>
     <string name="thinking_level_medium">中</string>

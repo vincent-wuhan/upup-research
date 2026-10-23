@@ -193,6 +193,7 @@ object Routes {
     const val APPEARANCE = "appearance"
     const val BACKGROUND = "background"
     const val ABOUT = "about"
+    const val UPUP_PANEL = "upup_panel"
     const val ONBOARDING_MODELS = "onboarding_models"
     /** T219-2: Mount external folders settings + detail. */
     const val MOUNTED_FOLDERS = "mounted_folders"
@@ -629,6 +630,7 @@ fun AppNavigation(
                 onBackgroundClick = { navController.safeNavigate(Routes.BACKGROUND) },
                 onLogsClick = { navController.safeNavigate(Routes.LOGS) },
                 onAboutClick = { navController.safeNavigate(Routes.ABOUT) },
+                onUpupPanelClick = { navController.safeNavigate(Routes.UPUP_PANEL) },
                 onMountedFoldersClick = { navController.safeNavigate(Routes.MOUNTED_FOLDERS) },
                 onSharedFoldersClick = { navController.safeNavigate(Routes.SHARED_FOLDERS) },
             )
@@ -1483,6 +1485,12 @@ fun AppNavigation(
 
         composable(Routes.ABOUT) {
             AboutScreen(onBack = { navController.safePopBackStack() })
+        }
+        composable(Routes.UPUP_PANEL) {
+            com.openminis.app.ui.settings.UpupPanelScreen(
+                providerRepository = providerRepository,
+                onBack = { navController.safePopBackStack() },
+            )
         }
 
         composable(Routes.LOGS) {
