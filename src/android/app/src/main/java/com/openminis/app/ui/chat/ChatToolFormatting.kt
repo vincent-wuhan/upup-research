@@ -127,7 +127,7 @@ internal fun toolAccentColorInt(toolName: String?): Int = when (toolName) {
  * several sessions edit concurrently; the vocabulary here is small and stable.
  */
 internal fun friendlyToolTitleFor(toolName: String?): String = when (toolName) {
-    null, "" -> "涨涨"
+    null, "" -> "Minis"
     "shell_execute" -> "Execute Shell"
     "file_read" -> "Read File"
     "file_write" -> "Write File"
