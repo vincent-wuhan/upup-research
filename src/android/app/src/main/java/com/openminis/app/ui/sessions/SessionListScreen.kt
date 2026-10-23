@@ -1007,6 +1007,30 @@ fun SessionListScreen(
                                 }
                             },
                         )
+                        // First-launch investment disclaimer gate. Shown over
+                        // the onboarding landing until acknowledged once;
+                        // the ack is persisted so returning users never see it.
+                        val disclaimerPrefs = remember {
+                            context.getSharedPreferences("upup_disclaimer", android.content.Context.MODE_PRIVATE)
+                        }
+                        var disclaimerAcked by remember {
+                            mutableStateOf(disclaimerPrefs.getBoolean("acknowledged", false))
+                        }
+                        if (!disclaimerAcked) {
+                            androidx.compose.material3.AlertDialog(
+                                onDismissRequest = { },
+                                title = { Text(stringResource(R.string.onboarding_disclaimer_title)) },
+                                text = { Text(stringResource(R.string.onboarding_disclaimer_body)) },
+                                confirmButton = {
+                                    androidx.compose.material3.TextButton(onClick = {
+                                        disclaimerPrefs.edit().putBoolean("acknowledged", true).apply()
+                                        disclaimerAcked = true
+                                    }) {
+                                        Text(stringResource(R.string.onboarding_disclaimer_agree))
+                                    }
+                                },
+                            )
+                        }
                     }
                 } else {
                     LazyColumn(

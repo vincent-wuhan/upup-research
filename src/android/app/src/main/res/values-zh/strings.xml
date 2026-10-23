@@ -1677,7 +1677,7 @@
     <string name="system_permissions_a11y_restricted_working">正在解除…</string>
     <string name="system_permissions_a11y_restricted_failed">解除失败 — 请按下方步骤手动操作</string>
     <string name="a11y_service_label">Minis 无障碍</string>
-    <string name="a11y_service_description">让 Minis 代表调用 android-a11y-cli 的 Agent 读取屏幕 UI 结构、执行点击与手势，并接收系统事件。</string>
+    <string name="a11y_service_description">让涨涨代表调用 android-a11y-cli 的 Agent 读取屏幕 UI 结构、执行点击与手势，并接收系统事件。</string>
     <string name="a11y_service_summary">Minis 的 UI 层自动化后端</string>
     <string name="back">返回</string>
     <string name="sessionlist_welcome_title">欢迎使用涨涨</string>
@@ -1896,7 +1896,7 @@
     <string name="selection_copy_as_markdown">复制为 Markdown</string>
     <string name="selection_copy_as_rich_text">复制为富文本</string>
     <string name="selection_copy_as_plain_text">复制为纯文本</string>
-    <string name="chat_input_placeholder_hint_5">Minis 可以把 ↩︎ 键设为发送或换行</string>
+    <string name="chat_input_placeholder_hint_5">涨涨可以把 ↩︎ 键设为发送或换行</string>
     <string name="chat_context_usage_hint">上下文已用 %1$s · %2$s</string>
     <string name="compact_progress">正在压缩… 已进行 %1$d 秒</string>
     <string name="compact_progress_split">正在压缩… %1$d 秒 · 分段摘要中（%2$d/%3$d）</string>
