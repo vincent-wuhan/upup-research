@@ -83,6 +83,11 @@ ensure_chat() { # 聊天页 = 同时有输入框和 Send；只有 EditText 时�
 new_chat() { # 回会话列表点 New Chat；大上下文会让回复变慢/诱发长工具链，各场景用新会话
     "$ADB" shell am force-stop $PKG >/dev/null 2>&1; sleep 1
     "$ADB" shell monkey -p $PKG -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1; sleep 3
+    # 重启会恢复到上次聊天页（可能带着断流重试横幅）；先退到会话列表再找 FAB
+    dump
+    if [ -n "$(edit_bounds)" ] && [ -n "$(desc_bounds Send)" ]; then
+        "$ADB" shell input keyevent 4; sleep 1.5
+    fi
     for _ in 1 2 3; do
         local c=$(desc_bounds New Chat); [ -z "$c" ] && c=$(desc_bounds 新建对话)
         [ -n "$c" ] && break
@@ -95,6 +100,9 @@ send_message() { # $1 = ASCII text (空格用 %s 由 input 处理)
     ensure_chat || { echo "not in chat" >&2; return 1; }
     local e=$(edit_bounds)
     "$ADB" shell input tap $e; sleep 1
+    # 草稿恢复会把上一场景的文本留在输入框里，input text 只追加 — 先清空
+    "$ADB" shell input keyevent 67 >/dev/null 2>&1
+    for _ in $(seq 1 60); do "$ADB" shell input keyevent 67 >/dev/null 2>&1; done
     "$ADB" shell input text "$1"; sleep 0.8
     # 点聊天区收起 slash 菜单/键盘，避免 Send 点击被菜单浮层吞掉
     "$ADB" shell input tap 540 700; sleep 1
