@@ -32,6 +32,10 @@ android {
     // Build.VERSION.SDK_INT >= 36 (see DynamicIslandSupport / AgentForegroundService).
     compileSdk = 36
 
+    // AGP 8.7 defaults to NDK 27.0.12077973; pin the locally available
+    // 27.1 side-by-side install instead.
+    ndkVersion = "27.1.12297006"
+
     defaultConfig {
         applicationId = "com.openminis.app"
         minSdk = 26

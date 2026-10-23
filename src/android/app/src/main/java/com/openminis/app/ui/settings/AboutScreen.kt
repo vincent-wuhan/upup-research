@@ -108,6 +108,15 @@ fun AboutScreen(onBack: () -> Unit) {
             )
         }
 
+        SettingsSection(header = stringResource(R.string.about_disclaimer_title)) {
+            Text(
+                stringResource(R.string.about_disclaimer_body),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            )
+        }
+
         SettingsSection(header = stringResource(R.string.about_links)) {
             SettingsRow(
                 icon = Icons.Outlined.Code,
@@ -118,7 +127,7 @@ fun AboutScreen(onBack: () -> Unit) {
                 // LocalInAppBrowserLauncher ambient defaults to a no-op when
                 // no InAppBrowserHost is in the tree above this screen — and
                 // nothing wraps Settings, so the row used to be a dead tap.
-                onClick = { openExternalUrl(context, "https://github.com/OpenMinis/OpenMinis") },
+                onClick = { openExternalUrl(context, "https://github.com/vincent-wuhan/upup-research") },
                 trailing = { ExternalLinkIcon() },
                 showDivider = false,
             )

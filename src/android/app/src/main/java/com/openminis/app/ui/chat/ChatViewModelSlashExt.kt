@@ -25,7 +25,10 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material.icons.outlined.Description
 import androidx.compose.material.icons.outlined.Extension
+import androidx.compose.material.icons.outlined.Security
+import androidx.compose.material.icons.outlined.TrendingUp
 import com.openminis.app.data.BPETokenizer
 import com.openminis.app.data.ContextOffload
 import com.openminis.app.data.ContextPolicy
@@ -144,6 +147,32 @@ internal fun ChatViewModel.filteredSlashCommands(): List<SlashCommand> {
                 isSkill = true,
             )
         } ?: emptyList()
+    // UpUp research workflows. Composer-fill rows like skills (isSkill=true):
+    // tapping fills "/<name> " and the UpUp engine executes the workflow
+    // server-side when the message is sent.
+    val upupRows = listOf(
+        SlashCommand(
+            id = "upup:invest",
+            icon = Icons.Outlined.TrendingUp,
+            title = "invest",
+            subtitle = context.getString(R.string.slash_upup_invest_subtitle),
+            isSkill = true,
+        ),
+        SlashCommand(
+            id = "upup:dossier",
+            icon = Icons.Outlined.Description,
+            title = "dossier",
+            subtitle = context.getString(R.string.slash_upup_dossier_subtitle),
+            isSkill = true,
+        ),
+        SlashCommand(
+            id = "upup:risk-dashboard",
+            icon = Icons.Outlined.Security,
+            title = "risk-dashboard",
+            subtitle = context.getString(R.string.slash_upup_risk_subtitle),
+            isSkill = true,
+        ),
+    )
     // [T-mcp-integration-android] MCP servers appear in the / picker too,
     // tagged [mcp] with a wrench icon to distinguish them from skills (⚡).
     // All servers enabled for this session are shown (not just the Top-20
@@ -163,7 +192,7 @@ internal fun ChatViewModel.filteredSlashCommands(): List<SlashCommand> {
                 isMcp = true,
             )
         } ?: emptyList()
-    val all = base + skillRows + mcpRows
+    val all = base + upupRows + skillRows + mcpRows
     return if (filter.isEmpty()) all else all.filter { it.title.lowercase().contains(filter) }
 }
 

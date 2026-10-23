@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Minis</string>
+    <string name="app_name">涨涨</string>
     <string name="new_chat">新对话</string>
     <string name="settings">设置</string>
     <string name="providers">AI 服务商</string>
@@ -303,7 +303,7 @@
     <string name="settings_feedback_telegram">反馈 (Telegram)</string>
     <string name="settings_feedback_email">反馈 (邮件)</string>
     <string name="about_title">关于</string>
-    <string name="about_minis_tagline">Minis 是完全本地、完全私密的设备端 Agent。</string>
+    <string name="about_minis_tagline">涨涨 — 你身边的中文投研 AI 助手。</string>
     <string name="about_links">链接</string>
     <string name="about_github_repository">GitHub 仓库</string>
     <string name="about_version_format">版本 %1$s (%2$s)</string>
@@ -367,9 +367,14 @@
     <string name="common_close">关闭</string>
     <string name="common_skip">跳过</string>
     <string name="common_next">下一步</string>
-    <string name="onboarding_welcome_title">欢迎使用 Minis</string>
-    <string name="onboarding_welcome_subtitle">集终端、浏览器和设备本地访问于一身的 AI 助手。</string>
+    <string name="onboarding_welcome_title">欢迎使用涨涨</string>
+    <string name="onboarding_welcome_subtitle">你身边的中文投研 AI 助手。</string>
     <string name="onboarding_get_started">开始使用</string>
+    <string name="onboarding_disclaimer_title">投资免责声明</string>
+    <string name="onboarding_disclaimer_body">涨涨生成的内容均由 AI 产出，仅供研究参考，不构成任何投资建议、推荐或买卖证券的要约。股市有风险，投资需谨慎，请独立判断并自主决策。</string>
+    <string name="onboarding_disclaimer_agree">我已知晓</string>
+    <string name="about_disclaimer_title">投资免责声明</string>
+    <string name="about_disclaimer_body">涨涨生成的内容均由 AI 产出，仅供研究参考，不构成任何投资建议、推荐或买卖证券的要约。股市有风险，投资需谨慎，请独立判断并自主决策。</string>
     <string name="onboarding_provider_title">添加提供方</string>
     <string name="onboarding_provider_subtitle">请至少为一个提供方输入 API 密钥以开始使用。</string>
     <string name="onboarding_provider_api_key_label">%1$s API 密钥</string>
@@ -1545,6 +1550,9 @@
     <string name="slash_thinking_subtitle">思考 %1$s — 点击切换</string>
     <string name="slash_thinking_unsupported">当前模型不支持</string>
     <string name="slash_clear_subtitle">清空当前会话的所有消息</string>
+    <string name="slash_upup_invest_subtitle">五阶段投资研究工作流</string>
+    <string name="slash_upup_dossier_subtitle">个股投研档案 — 基本面与估值</string>
+    <string name="slash_upup_risk_subtitle">组合风险仪表盘 — 仓位与风险监控</string>
     <string name="thinking_level_off">关闭</string>
     <string name="thinking_level_low">低</string>
     <string name="thinking_level_medium">中</string>
@@ -1672,7 +1680,7 @@
     <string name="a11y_service_description">让 Minis 代表调用 android-a11y-cli 的 Agent 读取屏幕 UI 结构、执行点击与手势，并接收系统事件。</string>
     <string name="a11y_service_summary">Minis 的 UI 层自动化后端</string>
     <string name="back">返回</string>
-    <string name="sessionlist_welcome_title">欢迎使用 Minis</string>
+    <string name="sessionlist_welcome_title">欢迎使用涨涨</string>
     <string name="sessionlist_welcome_subtitle">你的第一个端侧 Agent 即将就绪。</string>
     <string name="sessionlist_welcome_step1_title">添加供应商</string>
     <string name="sessionlist_welcome_step1_subtitle">配置 API Key 或使用 OAuth 登录</string>

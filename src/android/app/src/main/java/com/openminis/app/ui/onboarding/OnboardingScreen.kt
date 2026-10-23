@@ -52,8 +52,10 @@ import com.openminis.app.ui.components.MinisTextButton
 
 /**
  * Multi-step onboarding flow shown on first launch.
- * Step 1: Welcome + add at least one provider API key
- * Step 2: Select up to 3 models to form the default model group
+ * Step 1: Welcome
+ * Step 2: Investment disclaimer (must be acknowledged)
+ * Step 3: Add at least one provider API key
+ * Step 4: Select up to 3 models to form the default model group
  */
 @Composable
 fun OnboardingScreen(
@@ -64,8 +66,9 @@ fun OnboardingScreen(
 
     when (step) {
         0 -> WelcomeStep(onNext = { step = 1 })
-        1 -> ApiKeyStep(providerRepository = providerRepository, onNext = { step = 2 }, onSkip = onComplete)
-        2 -> ModelSelectionStep(providerRepository = providerRepository, onComplete = onComplete)
+        1 -> DisclaimerStep(onAgree = { step = 2 })
+        2 -> ApiKeyStep(providerRepository = providerRepository, onNext = { step = 3 }, onSkip = onComplete)
+        3 -> ModelSelectionStep(providerRepository = providerRepository, onComplete = onComplete)
     }
 }
 
@@ -94,6 +97,36 @@ private fun WelcomeStep(onNext: () -> Unit) {
             Spacer(Modifier.height(48.dp))
             MinisButton(onClick = onNext, modifier = Modifier.fillMaxWidth(0.6f)) {
                 Text(stringResource(R.string.onboarding_get_started))
+            }
+        }
+    }
+}
+
+@Composable
+private fun DisclaimerStep(onAgree: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(32.dp),
+        ) {
+            Text(
+                stringResource(R.string.onboarding_disclaimer_title),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+            )
+            Spacer(Modifier.height(16.dp))
+            Text(
+                stringResource(R.string.onboarding_disclaimer_body),
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(48.dp))
+            MinisButton(onClick = onAgree, modifier = Modifier.fillMaxWidth(0.6f)) {
+                Text(stringResource(R.string.onboarding_disclaimer_agree))
             }
         }
     }

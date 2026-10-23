@@ -2845,6 +2845,12 @@ class OpenAIProvider private constructor(
             .headersFor(requestUrl, sessionId)) {
             builder.header(key, value)
         }
+        // Same gating rationale as above: the conversation id only goes to the
+        // UpUp gateway, and follows the address actually dialled.
+        for ((key, value) in com.openminis.app.provider.UpUpSessionHeader
+            .headersFor(requestUrl, sessionId)) {
+            builder.header(key, value)
+        }
         // [T-android-model-custom-params] Per-model custom headers. Applied
         // after the ctor extraHeaders (so a user header can override a provider
         // default) but BEFORE chatExtraHeaders, so an explicit per-call
