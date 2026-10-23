@@ -3361,6 +3361,55 @@ class ChatViewModel(
      * Japanese IMEs auto-substitute the full-width form when the user types
      * `/` while a CJK keyboard layout is active. We treat them identically.
      */
+    private var upupToolCardSeq = 0
+
+    /**
+     * [upup-tool-cards] Turn a gateway tool marker into a native tool card
+     * block. "start" opens a RUNNING card; "end" closes the most recent
+     * RUNNING card with the same tool name (or lands as an already-finished
+     * card if the start marker was missed). Display-only: these blocks are
+     * rebuilt into ToolUse parts on persist and dropped as orphans on the
+     * next outbound turn, which is harmless under conversation-id routing.
+     */
+    private fun applyUpupToolMarker(allToolBlocks: MutableList<AssistantBlock>, marker: UpUpToolMarkers.Marker) {
+        if (marker.action == "start") {
+            upupToolCardSeq++
+            allToolBlocks.add(
+                AssistantBlock(
+                    id = "upuptool_${upupToolCardSeq}_${marker.name}",
+                    kind = "tool_use",
+                    toolName = marker.name,
+                    toolStatus = ToolBlockStatus.RUNNING,
+                    toolTitle = friendlyToolTitleFor(marker.name),
+                    startTimeMs = System.currentTimeMillis(),
+                ),
+            )
+            return
+        }
+        val idx = allToolBlocks.indexOfLast {
+            it.id.startsWith("upuptool_") && it.toolName == marker.name && it.toolStatus == ToolBlockStatus.RUNNING
+        }
+        val done = if (marker.ok == false) ToolBlockStatus.FAILED else ToolBlockStatus.SUCCESS
+        if (idx >= 0) {
+            val block = allToolBlocks[idx]
+            allToolBlocks[idx] = block.copy(
+                toolStatus = done,
+                durationMs = if (block.startTimeMs > 0) System.currentTimeMillis() - block.startTimeMs else 0L,
+            )
+        } else {
+            upupToolCardSeq++
+            allToolBlocks.add(
+                AssistantBlock(
+                    id = "upuptool_${upupToolCardSeq}_${marker.name}",
+                    kind = "tool_use",
+                    toolName = marker.name,
+                    toolStatus = done,
+                    toolTitle = friendlyToolTitleFor(marker.name),
+                ),
+            )
+        }
+    }
+
     fun tryExecuteInputAsSlashCommand(text: String): Boolean {
         val trimmed = text.trim()
         if (trimmed.isEmpty()) return false
@@ -11331,6 +11380,21 @@ class ChatViewModel(
                             "ttfbMs=${android.os.SystemClock.elapsedRealtime() - streamStartMs} " +
                             "kind=${chunk.javaClass.simpleName}",
                     )
+                }
+                // [upup-tool-cards] The UpUp gateway reports server-side tool
+                // activity as standalone marker deltas; upgrade them to native
+                // tool cards instead of leaking them into the reply text.
+                if (chunk is LLMStreamChunk.Text) {
+                    val markers = UpUpToolMarkers.extract(chunk.text)
+                    if (markers != null) {
+                        for (marker in markers) {
+                            applyUpupToolMarker(allToolBlocks, marker)
+                        }
+                        withContext(Dispatchers.Main) {
+                            updateAssistantMessage(assistantId, accumulatedText + turnTextSb.toString(), true, allToolBlocks)
+                        }
+                        return@collect
+                    }
                 }
                 when (chunk) {
                     is LLMStreamChunk.ThinkingDelta -> {
