@@ -420,6 +420,16 @@
     <string name="common_next">Next</string>
     <string name="onboarding_welcome_title">Welcome to Minis</string>
     <string name="onboarding_welcome_subtitle">Your Minis Agent with terminal, browser, and native device access.</string>
+    <string name="upup_connect_title">Connect UpUp Gateway</string>
+    <string name="upup_connect_subtitle">Enter your gateway address and access key. Everything else — provider, models, default group — is set up automatically.</string>
+    <string name="upup_connect_gateway_label">Gateway address</string>
+    <string name="upup_connect_key_label">Access key</string>
+    <string name="upup_connect_key_hint">Your gateway access key, issued with your UpUp account.</string>
+    <string name="upup_connect_action">Connect</string>
+    <string name="upup_connect_use_other">Use another model provider</string>
+    <string name="upup_connect_provider_label">UpUp</string>
+    <string name="upup_connect_group_name">UpUp</string>
+    <string name="upup_connect_error_missing">Enter both the gateway address and the access key.</string>
     <string name="onboarding_get_started">Get Started</string>
     <string name="onboarding_disclaimer_title">Investment Disclaimer</string>
     <string name="onboarding_disclaimer_body">All AI-generated content in this app is for research reference only. It does not constitute any investment advice, recommendation, or offer to buy or sell securities. Markets involve risk; invest with caution and make your own decisions.</string>
@@ -1865,6 +1875,8 @@
     <string name="sessionlist_welcome_step3_title">Start a Conversation</string>
     <string name="sessionlist_welcome_step3_subtitle">Tap to begin</string>
     <string name="sessionlist_welcome_step3_locked">Complete step 2 first</string>
+    <string name="sessionlist_welcome_connect_upup">Connect UpUp Gateway</string>
+    <string name="sessionlist_welcome_connect_upup_subtitle">One address and one key — provider, models and default group are set up for you.</string>
     <string name="sessionlist_welcome_restore_backup">Have a backup? Restore from it</string>
     <string name="sessionlist_welcome_step_done">Done</string>
 

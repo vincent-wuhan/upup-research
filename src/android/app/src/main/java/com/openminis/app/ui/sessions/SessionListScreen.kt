@@ -105,6 +105,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Surface
 import com.openminis.app.ui.components.MinisAlertDialog
+import com.openminis.app.ui.components.MinisButton
 import com.openminis.app.ui.components.MinisOutlinedButton
 import com.openminis.app.ui.components.MinisMenu
 import com.openminis.app.ui.components.MinisMenuDivider
@@ -505,6 +506,8 @@ fun SessionListScreen(
     onNewChat: (String) -> Unit,
     onSettingsClick: () -> Unit,
     onAddProviderClick: () -> Unit = {},
+    /** [T-upup-connect-step] 连接涨涨网关（零配置入口）。 */
+    onConnectUpUpClick: () -> Unit = {},
     onSelectModelsClick: () -> Unit = {},
     onRestoreBackupClick: () -> Unit = {},
     onTerminalClick: () -> Unit = {},
@@ -998,6 +1001,7 @@ fun SessionListScreen(
                             hasProviders = hasProviders,
                             hasGroups = hasGroups,
                             onAddProvider = onAddProviderClick,
+                            onConnectUpUp = onConnectUpUpClick,
                             onSelectModels = onSelectModelsClick,
                             onRestoreBackup = onRestoreBackupClick,
                             onStartConversation = {
@@ -3191,6 +3195,7 @@ private fun OnboardingLanding(
     hasProviders: Boolean,
     hasGroups: Boolean,
     onAddProvider: () -> Unit,
+    onConnectUpUp: () -> Unit,
     onSelectModels: () -> Unit,
     onStartConversation: () -> Unit,
     onRestoreBackup: () -> Unit = {},
@@ -3226,7 +3231,29 @@ private fun OnboardingLanding(
             textAlign = TextAlign.Center,
         )
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(24.dp))
+
+        // [T-upup-connect-step] 零配置入口：填一次网关地址 + 密钥，provider、
+        // 三个场景模型、默认分组一次写好，随后直接进对话。已配置过网关的
+        // 用户不再看到这条捷径（避免与三步清单重复）。
+        if (!hasProviders) {
+            MinisButton(
+                onClick = onConnectUpUp,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.sessionlist_welcome_connect_upup))
+            }
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = stringResource(R.string.sessionlist_welcome_connect_upup_subtitle),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+
+        Spacer(Modifier.height(24.dp))
 
         Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),

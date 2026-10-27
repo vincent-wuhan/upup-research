@@ -54,8 +54,9 @@ import com.openminis.app.ui.components.MinisTextButton
  * Multi-step onboarding flow shown on first launch.
  * Step 1: Welcome
  * Step 2: Investment disclaimer (must be acknowledged)
- * Step 3: Add at least one provider API key
- * Step 4: Select up to 3 models to form the default model group
+ * Step 3: Connect the UpUp gateway (zero-config path) — or pick another provider
+ * Step 4: Add at least one provider API key (other-provider path)
+ * Step 5: Select up to 3 models to form the default model group
  */
 @Composable
 fun OnboardingScreen(
@@ -67,8 +68,13 @@ fun OnboardingScreen(
     when (step) {
         0 -> WelcomeStep(onNext = { step = 1 })
         1 -> DisclaimerStep(onAgree = { step = 2 })
-        2 -> ApiKeyStep(providerRepository = providerRepository, onNext = { step = 3 }, onSkip = onComplete)
-        3 -> ModelSelectionStep(providerRepository = providerRepository, onComplete = onComplete)
+        2 -> ConnectUpUpStep(
+            providerRepository = providerRepository,
+            onComplete = onComplete,
+            onUseOtherProvider = { step = 3 },
+        )
+        3 -> ApiKeyStep(providerRepository = providerRepository, onNext = { step = 4 }, onSkip = onComplete)
+        4 -> ModelSelectionStep(providerRepository = providerRepository, onComplete = onComplete)
     }
 }
 

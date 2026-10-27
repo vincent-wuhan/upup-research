@@ -91,6 +91,8 @@ object Routes {
     const val SETTINGS = "settings"
     const val PROVIDER_LIST = "providers"
     const val ADD_PROVIDER = "add_provider"
+    /** [T-upup-connect-step] 首启零配置：连上网关即自动建好 provider/模型/默认组。 */
+    const val UPUP_CONNECT = "upup_connect"
     const val PROVIDER_DETAIL = "provider/{instanceId}"
     /** [T-android-provider-voice] Read-only shadow Voice Service detail. */
     const val SHADOW_VOICE_DETAIL = "voice_service/{instanceId}"
@@ -912,6 +914,22 @@ fun AppNavigation(
                 providerRepository = providerRepository,
                 onBack = { navController.safePopBackStack() },
                 onSaved = { navController.safePopBackStack() },
+            )
+        }
+
+        // [T-upup-connect-step] 连接涨涨网关：填地址 + 密钥 → 自动配置 → 直达对话。
+        composable(Routes.UPUP_CONNECT) {
+            com.openminis.app.ui.onboarding.ConnectUpUpStep(
+                providerRepository = providerRepository,
+                onComplete = {
+                    // 配置就绪即进新会话：draft id（__new__…）由 ChatScreen 的
+                    // draft 处理接住，首次发送时才落库。
+                    navController.safeNavigate(Routes.chat("__new__${java.util.UUID.randomUUID()}"))
+                },
+                onUseOtherProvider = {
+                    navController.safePopBackStack()
+                    navController.safeNavigate(Routes.ADD_PROVIDER)
+                },
             )
         }
 

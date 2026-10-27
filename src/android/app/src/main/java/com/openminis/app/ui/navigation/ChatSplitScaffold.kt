@@ -873,6 +873,8 @@ fun ChatSplitScaffoldRoute(
                 onNewChat = onSessionSelected,
                 onSettingsClick = { navController.safeNavigate(Routes.SETTINGS) },
                 onAddProviderClick = { navController.safeNavigate(Routes.ADD_PROVIDER) },
+                // [T-upup-connect-step] 首启零配置入口（连接涨涨网关）
+                onConnectUpUpClick = { navController.safeNavigate(Routes.UPUP_CONNECT) },
                 onSelectModelsClick = { navController.safeNavigate(Routes.ONBOARDING_MODELS) },
                 onRestoreBackupClick = {
                     navController.currentBackStackEntry?.savedStateHandle?.set(Routes.BACKUP_INITIAL_TAB_KEY, 1)
